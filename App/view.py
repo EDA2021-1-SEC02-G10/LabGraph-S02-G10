@@ -31,6 +31,7 @@ import threading
 from App import controller
 from DISClib.ADT import stack
 assert config
+import time
 
 """
 La vista se encarga de la interacción con el usuario.
@@ -84,6 +85,7 @@ def optionThree(cont):
 
 def optionFour(cont, initialStation):
     controller.minimumCostPaths(cont, initialStation)
+    
 
 
 def optionFive(cont, destStation):
@@ -134,8 +136,12 @@ def thread_cycle():
 
         elif int(inputs[0]) == 4:
             msg = "Estación Base: BusStopCode-ServiceNo (Ej: 75009-10): "
+            tiempo = time.process_time()
             initialStation = input(msg)
             optionFour(cont, initialStation)
+            tiempo_2 = time.process_time()
+            tiempo_T = tiempo_2 -tiempo 
+            print(tiempo_T)
 
         elif int(inputs[0]) == 5:
             destStation = input("Estación destino (Ej: 15151-10): ")
@@ -154,6 +160,7 @@ def thread_cycle():
 
 
 if __name__ == "__main__":
+    print(sys.getrecursionlimit())
     threading.stack_size(67108864)  # 64MB stack
     sys.setrecursionlimit(2 ** 20)
     thread = threading.Thread(target=thread_cycle)
